@@ -26,7 +26,7 @@ La posibilidad de llegar al O(1) 🚀🚀🚀
     class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
     <simple-icons-geeksforgeeks/>
   </a>
-  <a href="https://www.geeksforgeeks.org/hashing-data-structure/" target="_blank" alt="GitHub"
+  <a href="https://www.cs.usfca.edu/~galles/visualization/OpenHash.html" target="_blank" alt="GitHub"
     class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
     <file-icons-sandbox/>1
   </a>
@@ -58,16 +58,18 @@ Es una estructura de datos que permite almacenar un conjunto de datos en **O(1)c
 
 ---
 layout: image-right
-image: https://c.tenor.com/IvyuPtEfzhoAAAAC/matrix.gif
+image: /definition.jpg
 ---
 
 # Vocabulario
 
-## La tabla en si
+<br/>
+
+## La tabla en sí
 Es un array que contendra los elementos.
 
-## Buckets
-Cada celda del array se lo conoce como "buckets" 🪣
+## Buckets 🪣
+Cada celda del array se lo conoce como "buckets".
 
 ## Funcion de hash
 Toda tabla de hash necesita una funcion de hash para realizar sus operciones basicas.
@@ -82,8 +84,7 @@ Toda tabla de hash necesita una funcion de hash para realizar sus operciones bas
 <br>
 
 ```cpp
-// Una funcion de hash que toma un string y devuelve 
-// un entero.
+// Una funcion de hash que toma un string y devuelve un entero.
 // Para ello suma todos los caracteres del string.
 int hash(string key) {
   int h = 0;
@@ -105,6 +106,9 @@ int hash(string key) {
     <ul>
       <li>Evitar colisiones 💢</li>
       <li>Ser O(1)pc 🚀</li>
+      <li>Efecto avalancha 🏔️ 
+        <a href="https://en.wikipedia.org/wiki/Avalanche_effect" target="_blank">link</a>
+      </li>
     </ul>
   </div>
   <div >
@@ -151,14 +155,162 @@ int hash3(string key) {
 }
 ```
 
+---
+
+# Colisiones 💢
+Cuando dos entradas diferentes les corresponde el mismo bucket. 
+
+La cantidad de colisiones depende de dos factores:
+- **Que tan buena es la funcion de hash**
+
+A mayor distribucion de la funcion de hash, menor cantidad de colisiones.
+
+- **El factor de carga (λ)**
+
+Una tabla muy "cargada" tendra mas colisiones.
+
+
 
 ---
 
+# Colisiones = 💩
+Las colisiones es algo que debemos evitar a toda costa.
+
+La razon principal es porque las operaciones de la tabla de hash (`insertar` | `buscar` | `eliminar`) dejan de ser **O(1)cp**.
+Lo cual deja de ser una estructura de datos eficiente y pierde todo atractivo de uso. 
+
+<v-click>
+  <div class="grid place-items-center">
+    <img class="center max-w-xs" src="/colisiones.png">
+  </div>
+</v-click>
+
+
 ---
-layout: center
-class: text-center
+layout: image
+image: https://images.unsplash.com/photo-1463680942456-e4230dbeaec7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
+class: "text-center"
 ---
 
-# Learn More
+# Manejo de colisiones
+Hash abierto | Hash cerrado
+---
+layout: two-cols
+---
 
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
+# Hash abierto
+aka Separate chaining
+
+Los elementos se encuentran en una estructura ilimitada (generalmente listas enlazadas).
+
+<div class="img-container">
+  <img class="max-w-xs" src="/hash-abierto.png"/>
+</div>
+
+<a href="https://www.cs.usfca.edu/~galles/visualization/OpenHash.html" target="_blank"
+    class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
+    <file-icons-sandbox/> visualizador
+</a>
+
+::right::
+
+# Hash cerrado
+aka Open Addressing
+
+Los elementos se encuentran dentro de los buckets. 
+
+<div class="img-container">
+  <img class="max-w-xs" src="/hash-cerrado.png"/>
+</div>
+
+<a href="https://www.cs.usfca.edu/~galles/visualization/ClosedHash.html" target="_blank"
+    class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
+    <file-icons-sandbox/> visualizador
+</a>
+
+<style>
+.img-container {
+  background-color: #f5f5f5;
+  width: fit-content;
+}
+</style>
+
+---
+
+# Tipos de hash cerrado
+La busqueda del bucket deseado se hace a prueba y error.
+
+Existen tres tipos de hash cerrado:
+
+- [Lineal](https://en.wikipedia.org/wiki/Linear_probing): prueba de forma lineal `index(key,i) = h(key) + i`
+- [Cuadratico](https://en.wikipedia.org/wiki/Quadratic_probing): prueba de forma cuadratica `index(key,i) = h(key) + i^2`
+- [Doble hash](https://en.wikipedia.org/wiki/Double_hashing): prueba usando una segunda funcion de hash `index(key,i) = h(key) + i*h2(key)`
+
+<br/>
+
+```cpp {all|2,3|4,5|6,7|all}
+int calculateIndex(K key, unsigned int tryCount) {
+  if (type == LINEAR_PROBING) 
+    return abs(hashFunction(key) + tryCount) % buckets;
+  else if (type == QUADRATIC_PROBING) 
+    return abs(hashFunction(key) + pow(tryCount, 2)) % buckets;
+  else if (type == DOUBLE_HASHING)
+      return abs(hashFunction(key) + tryCount * hashFunction2(key)) % buckets;
+}
+
+```
+<br>
+
+> **Nota**: `i` es el numero de intento.
+
+---
+
+# Hash abierto vs cerrado
+
+|Abierto | Cerrado |
+| --- | --- |
+| Facilidad de implementacion. | Requiere mayor cuidado, por ejemplo [cuando eliminamos](https://stackoverflow.com/questions/9127207/hash-table-why-deletion-is-difficult-in-open-addressing-scheme). |
+| Nunca esta "lleno" (λ puede ser mayor a 1). | El factor de carga **nunca** puede ser mayor a 1. |
+| Menos sensible a la funcion de hash y el factor de carga | Mas sensible a la funcion de hash y el factor de carga |
+
+
+---
+
+# Factor de carga (λ)
+El factor de carga es un número (>=0) que indica que tan “lleno” está nuestra estructura.
+
+```
+λ = N / B
+```
+
+Donde N es la cantidad de elementos y B la cantidad de buckets
+
+---
+
+# Rehash
+Una técnica que consiste en aumentar la cantidad de buckets.
+
+A medida que la tabla de hash crece, nuestro λ también lo hace, lo cual aumenta la posibilidad de colisiones.
+
+El re-hashing es una operación MUY costosa y debe ser debidamente planeada.
+
+Por lo general el nuevo tamanio es el doble que el anterior
+
+Tiene O(N) promedio.
+
+---
+
+# Usos
+No son buenas para todo.
+
+Las tablas de hash pueden ser muy útiles en operaciones como: buscar, insertar y eliminar elementos.
+
+Son pobres para el uso de operaciones donde los elementos están relacionados entre sí, por ejemplo listar de forma ordenada, o buscar el mínimo.
+
+
+---
+
+# Cuestionario
+
+[https://tinyurl.com/36u39rde](https://tinyurl.com/36u39rde)
+<QR qrText="https://tinyurl.com/36u39rde" qrWidth="300"></QR>
