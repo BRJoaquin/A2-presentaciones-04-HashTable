@@ -300,7 +300,7 @@ A medida que la tabla de hash crece, nuestro λ también lo hace, lo cual aument
 
 El re-hashing es una operación MUY costosa y debe ser debidamente planeada.
 
-Por lo general el nuevo tamanio es el doble que el anterior
+Por lo general el nuevo tamaño es el doble que el anterior
 
 Tiene O(N) promedio.
 
