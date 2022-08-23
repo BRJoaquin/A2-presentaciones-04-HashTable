@@ -5,14 +5,17 @@ const props = defineProps({
   text: {
     default: '',
   },
+  bucektSize: {
+    default: 10,
+  },
   text1: {
-    default: '',
+    default: 0,
   },
   text2: {
-    default: '',
+    default: 0,
   },
   text3: {
-    default: '',
+    default: 0,
   },
 })
 
@@ -51,9 +54,9 @@ function hash3(text: string) : number {
 }
 
 function hash() {
-  text1.value = hash1(text.value).toString()
-  text2.value = hash2(text.value).toString()
-  text3.value = hash3(text.value).toString()
+  text1.value = hash1(text.value)
+  text2.value = hash2(text.value)
+  text3.value = hash3(text.value)
 
 }
 
@@ -61,15 +64,25 @@ function hash() {
 </script>
 
 <template>
-  <div flex="~" w="min">
-    <input type="text" v-model="text" v-on:keyup="hash"/>
+  <div >
+    Elemento (string)
+    <input type="text" v-model="text" v-on:keyup="hash" placeholder="key"/>
+    <br><br>
+    Número de buckets
+    <input type="number"  v-model=bucektSize />
   </div>
   <br/>
-  hash 1: {{ text1 }}
+  hash 1: {{ text1 }} 
+  <br/>
+  index 1: {{ text1 % bucektSize }}
   <br/>
   <br/>
   hash 2: {{ text2 }}
   <br/>
+  index 2: {{ text2 % bucektSize }}
+  <br/>
   <br/>
   hash 3: {{ text3 }}
+  <br/>
+  index 3: {{ text3 % bucektSize }}
 </template>
