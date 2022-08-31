@@ -275,6 +275,9 @@ int calculateIndex(K key, unsigned int tryCount) {
 | Nunca está "lleno" (λ puede ser mayor a 1). | El factor de carga **nunca** puede ser mayor a 1. |
 | Menos sensible a la función de hash y el factor de carga. | Más sensible a la función de hash y el factor de carga. |
 
+<br>
+
+Lectura recomendada: [Estudio empirico](https://www.atlantis-press.com/article/14750.pdf)
 
 ---
 
