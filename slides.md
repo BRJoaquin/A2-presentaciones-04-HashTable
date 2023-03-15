@@ -38,9 +38,28 @@ La posibilidad de llegar al O(1) 🚀🚀🚀
 
 ---
 
-# Qué es una tablas de hash?
+# Tabla
 
-Es una estructura de datos que permite almacenar un conjunto de datos en **O(1)cp**
+Tipo abstracto de datos
+
+Permite asociar un valor a una clave. Y se especializa en:
+
+- `Búsqueda` dado una clave, devuelve el valor asociado.
+- `Insertar` dado una clave y un valor, inserta el valor en la tabla.
+- `Eliminar` dado una clave, elimina el valor asociado.
+
+<br>
+<br>
+
+> 📗 Nota: Las claves de la tabla deben ser **únicos**.
+
+---
+
+# Tabla de hash
+
+Estructura de datos
+
+Permite almacenar un conjunto de datos en **O(1)cp**
 
 - `Búsqueda`
 - `Insertar`
@@ -49,12 +68,15 @@ Es una estructura de datos que permite almacenar un conjunto de datos en **O(1)c
 <br>
 <br>
 
-> 📗 Nota: Los elementos de la tabla de hash deben ser **únicos**.
+> 📘 Nota: Los elementos no necesitan definir un orden para ser almacenados. A diferencia de los ABB | AVL.
 
-<br/>
+---
+layout: quote
+---
 
-> 📘 Nota 2: Los elementos no necesitan definir un orden para ser almacenados. A diferencia de los ABB | AVL.
+# Cual es la diferencia? 🤔
 
+---
 
 ---
 layout: image-right
@@ -115,6 +137,14 @@ int hash(string key) {
     <img class="max-w-xs" src="/6qpf3b.jpg">
   </div>
 </div>
+
+---
+layout: quote
+---
+
+# Existe la funcion de hash perfecta? 🤔
+
+[link](https://en.wikipedia.org/wiki/Perfect_hash_function#:~:text=In%20computer%20science%2C%20a%20perfect,it%20is%20an%20injective%20function.)
 
 
 ---
@@ -237,6 +267,31 @@ Los elementos se encuentran dentro de los buckets.
   width: fit-content;
 }
 </style>
+
+---
+
+# Hash abierto
+Resolución de colisiones
+
+Hash abierto es una técnica de resolución de colisiones en tablas de hash, donde los elementos colisionados se insertan en una lista enlazada en el mismo índice de la tabla.
+
+- Facilidad de implementación
+- Soporta factores de carga altos (mayores a 1)
+- Facil eliminación de elementos
+
+---
+
+# Hash cerrado
+Resolución de colisiones
+
+Hash cerrado es una técnica de resolución de colisiones en tablas de hash, donde los elementos colisionados se insertan en el mismo índice de la tabla.
+
+- Soporta factores de carga bajos (menores a 1)
+- La eliminación de elementos es más complicada. [link](https://stackoverflow.com/questions/9127207/hash-table-why-deletion-is-difficult-in-open-addressing-scheme)
+- Existen varios subtipos de hash cerrado: lineal, cuadrático, doble hash, etc.
+- Tengo que detectar loops infinitos.
+- Tengo que detectar cuando la tabla está llena.
+- Se aconseja numeros primos para el tamaño de la tabla.
 
 ---
 
