@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import './Hashing.css'
 
 const props = defineProps({
   text: {
@@ -66,10 +67,10 @@ function hash() {
 <template>
   <div >
     Elemento (string)
-    <input type="text" v-model="text" v-on:keyup="hash" placeholder="key"/>
+    <input  class="input-hash" type="text" v-model="text" v-on:keyup="hash" placeholder="key"/>
     <br><br>
     Número de buckets
-    <input type="number"  v-model=bucektSize />
+    <input class="input-hash" type="number"  v-model=bucektSize />
   </div>
   <br/>
   hash 1: {{ text1 }} 
