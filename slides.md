@@ -1,19 +1,18 @@
 ---
-# try also 'default' to start simple
 theme: default
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/photos/6terqWC_KCk
 background: https://images.unsplash.com/photo-1611702700098-dec597b27d9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80
-# apply any windi css classes to the current slide
-class: 'text-center'
-# https://sli.dev/custom/highlighters.html
+class: text-center
 highlighter: shiki
-# show line numbers in code blocks
-lineNumbers: true
-# some information about the slides, markdown enabled
+lineNumbers: false
 drawings:
   persist: false
-css: windicss
+defaults:
+  foo: true
+# transition: none
+title: Tablas de hash
+mdc: true
+monaco: true
+monacoTypesSource: local # or cdn or none
 ---
 
 # Tablas de hash
@@ -22,10 +21,6 @@ La posibilidad de llegar al O(1) 🚀🚀🚀
 
 
 <div class="abs-br m-6 flex gap-2">
-  <a href="https://www.geeksforgeeks.org/hashing-data-structure/" target="_blank" alt="GitHub"
-    class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
-    <simple-icons-geeksforgeeks/>
-  </a>
   <a href="https://www.cs.usfca.edu/~galles/visualization/OpenHash.html" target="_blank" alt="GitHub"
     class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
     <file-icons-sandbox/>1
@@ -35,6 +30,7 @@ La posibilidad de llegar al O(1) 🚀🚀🚀
     <file-icons-sandbox/>2
   </a>
 </div>
+
 
 ---
 
@@ -53,13 +49,14 @@ Permite asociar un valor a una clave. Y se especializa en:
 
 > 📗 Nota: Las claves de la tabla deben ser **únicos**.
 
+
 ---
 
 # Tabla de hash
 
 Estructura de datos
 
-Permite almacenar un conjunto de datos en **O(1)cp**
+Permite almacenar y gestionar un conjunto de datos en **O(1)cp**
 
 - `Búsqueda`
 - `Insertar`
@@ -70,13 +67,13 @@ Permite almacenar un conjunto de datos en **O(1)cp**
 
 > 📘 Nota: Los elementos no necesitan definir un orden para ser almacenados. A diferencia de los ABB | AVL.
 
+
 ---
 layout: quote
 ---
 
 # Cual es la diferencia? 🤔
 
----
 
 ---
 layout: image-right
@@ -95,6 +92,7 @@ Cada celda del array se lo conoce como "buckets".
 
 ## Función de hash
 Toda tabla de hash necesita una función de hash para realizar sus operciones básicas.
+
 
 ---
 
@@ -117,6 +115,7 @@ int hash(string key) {
 ```
 <br>
 
+
 ---
 
 # Características de una **buena** función de hash ✅
@@ -138,6 +137,7 @@ int hash(string key) {
   </div>
 </div>
 
+
 ---
 layout: quote
 ---
@@ -151,7 +151,7 @@ layout: quote
 layout: two-cols
 ---
 
-<Hashing m="t-4" />
+<Hashing m="t-4" text="test" bucketSize="10"/>
 
 [Ejemplos de distribución](https://docs.google.com/spreadsheets/d/1Rkgw8dTzOiEo9i2jh9iKmjVFG_UXsTeaLfKUk8GIkP4/edit#gid=0)
 
@@ -187,6 +187,7 @@ int hash3(string key) {
 }
 ```
 
+
 ---
 
 # Colisiones 💢
@@ -202,7 +203,6 @@ A mayor distribución de la función de hash, menor cantidad de colisiones.
 Una tabla muy "cargada" tendrá más colisiones.
 
 
-
 ---
 
 # Colisiones = 💩
@@ -214,19 +214,24 @@ Lo cuál deja de ser una estructura de datos eficiente y pierde todo atractivo d
 <v-click>
   <div class="grid place-items-center">
     <img class="center max-w-xs" src="/colisiones.png">
-    Ejemplo: <a href="https://es.wikipedia.org/wiki/Paradoja_del_cumplea%C3%B1os" target="_blank" alt="GitHub">
-      la paradoja del cumpleaños </a>
+    <a href="https://es.wikipedia.org/wiki/Paradoja_del_cumplea%C3%B1os" target="_blank" alt="GitHub">
+        Ejemplo: la paradoja del cumpleaños
+    </a>
   </div>
 </v-click>
 
+
 ---
 layout: image
-image: https://images.unsplash.com/photo-1463680942456-e4230dbeaec7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
-class: "text-center"
+image: >-
+  https://images.unsplash.com/photo-1463680942456-e4230dbeaec7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
+class: text-center
 ---
 
 # Manejo de colisiones
 Hash abierto | Hash cerrado
+
+
 ---
 layout: two-cols
 ---
@@ -268,6 +273,7 @@ Los elementos se encuentran dentro de los buckets.
 }
 </style>
 
+
 ---
 
 # Hash abierto
@@ -278,6 +284,7 @@ Hash abierto es una técnica de resolución de colisiones en tablas de hash, don
 - Facilidad de implementación
 - Soporta factores de carga altos (mayores a 1)
 - Facil eliminación de elementos
+
 
 ---
 
@@ -292,6 +299,7 @@ Hash cerrado es una técnica de resolución de colisiones en tablas de hash, don
 - Tengo que detectar loops infinitos.
 - Tengo que detectar cuando la tabla está llena.
 - Se aconseja numeros primos para el tamaño de la tabla.
+
 
 ---
 
@@ -320,6 +328,7 @@ int calculateIndex(K key, unsigned int tryCount) {
 
 > **Nota**: `i` es el número de intento.
 
+
 ---
 
 # Hash abierto vs cerrado
@@ -333,6 +342,7 @@ int calculateIndex(K key, unsigned int tryCount) {
 <br>
 
 Lectura recomendada: [Estudio empirico](https://www.atlantis-press.com/article/14750.pdf)
+
 
 ---
 
@@ -348,6 +358,7 @@ Donde N es la cantidad de elementos y B la cantidad de buckets
 <br>
 
 > Nota: el calculo de `λ` es el mismo para hash abierto o cerrado.
+
 
 ---
 
@@ -366,6 +377,7 @@ Tiene O(N) promedio.
 
 > Nota: rehash es un concepto tanto para hash abierto comoo cerrado.
 
+
 ---
 
 # Usos
@@ -375,10 +387,15 @@ Las tablas de hash pueden ser muy útiles en operaciones como: `buscar`, `insert
 
 Son poco atractivas para el uso de operaciones donde los elementos están relacionados entre sí, por ejemplo listar de forma ordenada, o buscar el mínimo.
 
-
+---
+layout: center
+class: text-center
 ---
 
-# Cuestionario
+# Learn More
 
-[https://tinyurl.com/36u39rde](https://tinyurl.com/36u39rde)
-<QR qrText="https://tinyurl.com/36u39rde" qrWidth="300"></QR>
+[Wikipedia](https://en.wikipedia.org/wiki/Hash_table) · [GeeksForGeeks](https://www.geeksforgeeks.org/hashing-data-structure/) · [Visualizador (abierto)](https://www.cs.usfca.edu/~galles/visualization/OpenHash.html) · [Visualizador (cerrado)](https://www.cs.usfca.edu/~galles/visualization/ClosedHash.html) · [Resumen](https://publish.obsidian.md/algoritmos/Estructuras+de+datos/Tabla+de+hash)
+<br>
+<br>
+
+Bibliografia: Cap 5, Estructuras de datos y algoritmos, Mark Allen Weiss
