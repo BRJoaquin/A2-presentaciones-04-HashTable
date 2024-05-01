@@ -291,7 +291,7 @@ Hash abierto es una técnica de resolución de colisiones en tablas de hash, don
 # Hash cerrado
 Resolución de colisiones
 
-Hash cerrado es una técnica de resolución de colisiones en tablas de hash, donde los elementos colisionados se insertan en el mismo índice de la tabla.
+Hash cerrado es una técnica de resolución de colisiones en tablas de hash, donde los elementos se insertan en el mismo índice de la tabla.
 
 - Soporta factores de carga bajos (menores a 1)
 - La eliminación de elementos es más complicada. [link](https://stackoverflow.com/questions/9127207/hash-table-why-deletion-is-difficult-in-open-addressing-scheme)
