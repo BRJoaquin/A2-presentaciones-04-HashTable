@@ -182,7 +182,7 @@ int hash2(string key) {
 int hash3(string key) {
   int h = 0;
   for (int i = 0; i < key.length(); i++)
-    h = 31 * h + int(clave[i]);
+    h = 31 * h + int(key[i]);
   return h;
 }
 ```
