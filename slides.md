@@ -72,7 +72,7 @@ Permite almacenar y gestionar un conjunto de datos en **O(1)cp**
 layout: quote
 ---
 
-# Cual es la diferencia? 🤔
+# ¿Cuál es la diferencia? 🤔
 
 
 ---
